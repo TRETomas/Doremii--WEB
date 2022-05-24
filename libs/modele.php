@@ -58,3 +58,5 @@ function isAdmin($idUser)
 {
 	// vérifie si l'utilisateur est un administrateur
 }
+
+?>
