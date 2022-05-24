@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Doremii</title>
+</head>
+<body onload="chargement();">
+
+
+	<div id="header">
+		<img id="logo" src ="play.png"/>
+		<ul>
+			
+			<a href="accueil.html" ><h3 id="accueil">Accueil</h3></a>
+			<a href="recherche.html"><h3 id="recherche">Recherche</h3></a>
+			<a href="playlist.html"><h3 id="playlist">Playlists</h3></a>
+			<a href="parametre.html"><h3 id="parametre">Paramètres</h3></a>
+			<a href="connexion.html"><h3 id="Connexion">Connexion</h3>
+			<a href="accueil.html"><h3 id="deconnexion">Déconnexion</h3></a>		
+		</ul>
+	</div>
+
+	<div id="page">
+		<h4>Recherche</h4>
+		<p>Vous pouvez effectuer votre recherche ici:</p>
+		<input type="text" placeholder="Titre de la playlist" id="champ" onclick="Recherche();"/>
+</div>
+
+	</div>
+</body>
+</html>
+
+
+
+</html>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+	body{margin:0;
+		font-family: 'Comfortaa', cursive, sans-serif;
+		background-color: whitesmoke;
+		}
+	
+	#header{
+		border:solid black 2px ;
+		width: 100%;
+		background-color:orange ;
+		display: flex;
+		color: black;
+		display: flex;
+		flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+		
+	}
+
+#header h3{border: black solid 2px;
+
+
+padding: 20px;
+}
+
+#accueil,#playlist,#parametre,#Connexion,#deconnexion{
+	background-color: whitesmoke;
+}
+#recherche{
+	background-color: lightblue;
+}
+#header ul{
+	display: flex;
+
+
+
+}
+
+	#header a{text-decoration: none;
+		color: black;}
+
+#logo{width: 100px;
+height: 100px;
+display: flex;
+margin: auto 0px auto 0px;
+align-content: space-around;}
+
+
+
+#header h3:hover{
+	background-color: lightblue;
+}
+
+#page{
+	border: 3px solid black;
+	border-radius:10px;
+	margin: 50px 200px 50px 200px;
+	padding: 10px;
+	background-color: cornsilk;
+	height:500px;
+	
+
+}
+
+#page #champ{
+	text-align:justify;
+	border: 2px solid black;
+	margin: auto;
+	width: 80%;
+	height: 5%;
+	font-family:'Comfortaa', cursive, sans-serif ;
+	border-radius: 3px;
+
+}
+
+
+
+
+</style>
+
+<script>
+
+var refchamp=null;
+/***************************************************/
+//les playlists de la base de donnée              //
+/*************************************************/
+var playlistjson='{["titre":"ma playlist","auteur":"Folschette","contenu":[{"titre":"les copains d\'abord","auteur":"brassens","lien":"https://www.youtube.com/watch?v=L9oEcWFjF3M","durée":"3.22"}],"commentaires":[{"auteur":"Bourdeau","contenu":"waow trop cool la musique"}],"image":"https://img-4.linternaute.com/kb1ur329miq3X81GcB6ZPtT5RsY=/1500x/smart/6472d6237ac34ad2817eb86dd4f67be1/ccmcms-linternaute/28904252.jpg]}';
+/***************************************/
+/**************************************/
+/**************************************/
+function chargement(){
+refchamp=document.getElementById("champ");
+
+}
+
+function Recherche(){
+
+//TODO: voir l'éditeur de text html fait en cour *
+
+
+
+
+
+}
+
+
+function afficherplaylist(){
+
+}
+
+</script>

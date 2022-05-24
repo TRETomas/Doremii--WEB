@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Doremii</title>
+</head>
+<body onload="chargement();">
+
+
+	<div id="header">
+		<img id="logo" src ="play.png"/>
+		<ul>
+			
+			<a href="accueil.html" ><h3 id="accueil">Accueil</h3></a>
+			<a href="recherche.html"><h3 id="recherche">Recherche</h3></a>
+			<a href="playlist.html"><h3 id="playlist">Playlists</h3></a>
+			<a href="parametre.html"><h3 id="parametre">Paramètres</h3></a>
+			<a href="connexion.html"><h3 id="Connexion">Connexion</h3>
+			<a href="accueil.html"><h3 id="deconnexion">Déconnexion</h3>
+</a>		</ul>
+	</div>
+
+	<div id="page">
+		<a href="creationplaylist.html" ><img id="new" title="Nouvelle Playlist"src="plus.png"/></a>
+		<div id="lesplay"></div>
+	</div>
+</body>
+</html>
+
+
+
+</html>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+	body{margin:0;
+		font-family: 'Comfortaa', cursive, sans-serif;
+		}
+	
+	#header{
+		border:solid black 2px ;
+		width: 100%;
+		background-color:orange ;
+		display: flex;
+		color: black;
+		display: flex;
+		flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+		
+	}
+
+	#recherche,#Connexion,#parametre,#accueil,#deconnexion{
+	background-color: whitesmoke;
+}
+#playlist{
+	background-color: lightblue;
+}
+
+#header h3{border: black solid 2px;
+
+
+padding: 20px;
+}
+
+
+#header ul{
+	display: flex;
+
+
+
+}
+
+	#header a{text-decoration: none;
+		color: black;}
+
+#logo{width: 100px;
+height: 100px;
+display: flex;
+margin: auto 0px auto 0px;
+align-content: space-around;}
+
+
+
+#header h3:hover{
+	background-color: lightblue;
+}
+
+#page{
+	border: 3px solid black;
+	border-radius:10px;
+	margin: 50px 200px 50px 200px;
+	padding: 10px;
+	background-color: cornsilk;
+	height:500px;
+	
+
+}
+
+.playlist{
+
+	display: flex;
+	flex-direction: row;
+	border: 1px solid black;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	justify-content: space-between;
+	background-color: whitesmoke;
+
+}
+
+.playlist:hover{
+	background-color: lightblue;
+
+}
+
+.contenu
+{ line-height:auto;
+margin-top:auto;
+margin-bottom: auto;
+
+padding: auto;}
+
+.Pmage{
+max-width:20% ;
+max-height: 33%;
+
+}
+
+.interaction{max-height: 50px;
+			max-width: 50px;
+			margin-top:2.5%;
+}
+
+.interaction img{
+	widths: 60%;
+	height: 60%;
+	margin: 6%;
+		
+	}
+
+#new{
+	max-height: 50px;
+			max-width: 50px;
+}
+
+
+</style>
+
+<script>
+
+var refpage=null;
+var refplaylists=null;
+/***************************************************/
+//les playlists de l'utilisateur et celles likéess//
+/*************************************************/
+//TODO:
+//rajouter un lien sur la playlist
+//rajouter des liens sur les interactions
+var playlistjson='{"playlists":[{"titre":"ma playlist","auteur":"Folschette","contenu":[{"titre":"les copains d\'abord","auteur":"brassens","lien":"https://www.youtube.com/watch?v=L9oEcWFjF3M","durée":"3.22"}],"commentaires":[{"auteur":"Bourdeau","contenu":"waow trop cool la musique"}],"image":"https://cdn.radiofrance.fr/s3/cruiser-production/2021/09/02d87e5b-a601-4ceb-a2e7-2208e0d676ff/1136_gettyimages-1151977526.jpg"}]}';
+					
+/***************************************/
+/**************************************/
+/**************************************/
+function chargement(){
+refpage=document.getElementById("lesplay");
+refplaylists=JSON.parse(playlistjson);
+console.log(refplaylists)
+afficherplaylist();
+}
+
+
+
+
+function afficherplaylist(){
+	var i;
+	refpage.innerHTML=null;
+	//refplaylists.playlists.length;
+	
+	for(i=0;i<refplaylists.playlists.length;i++){
+		if(refplaylists.playlists[i].image!=null)
+			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+refplaylists.playlists[i].image+"' />"+"<div class='contenu'>"+"<h4>"+refplaylists.playlists[i].titre+"</h4>"+"<p>"+refplaylists.playlists[i].auteur+"</p>"+"<p>Nombre de musiques: "+refplaylists.playlists[i].contenu.length+"</p>"+"</div>"+"<div class='interaction'><img src='play.png' /><img src='like.png' /><img src='comment.png' /></div></div>";
+		
+		else
+			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='default.png' />"+"<div class='contenu'>"+"<h4>"+refplaylists.playlists[i].titre+"</h4>"+"<p>"+refplaylists.playlists[i].auteur+"</p>"+"<p>Nombre de musiques: "+refplaylists.playlists[i].contenu.length+"</p>"+"</div>"+"<div class='interaction'><img src='play.png'/><img src='like.png'/><img src='comment.png'/></div></div>";
+	}
+
+
+
+}
+
+</script>
