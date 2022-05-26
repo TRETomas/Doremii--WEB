@@ -1,4 +1,8 @@
 <?php
+
+// TODO modiifier les regles css pour nouvelle playlist creation compte etc etc 
+
+
 include_once("libs/modele.php");
 // Si la page est appelée directement par son adresse, on redirige en passant pas la page index
 if (basename($_SERVER["PHP_SELF"]) != "index.php")
@@ -25,19 +29,23 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 
 
 	<div id="header">
-		<img id="logo" src ="play.png"/>
+		<img id="logo" src ="ressources/play.png"/>
 		<ul>
 			
 			<a href="index.php?view=accueil" ><h3 id="accueil">Accueil</h3></a>
 			<a href="index.php?view=recherche"><h3 id="recherche">Recherche</h3></a>
-			<a href="index.php?view=playlist"><h3 id="playlist">Playlists</h3></a>
-			<a href="index.php?view=gestioncompte"><h3 id="parametre">Paramètres</h3></a>
 			
+			
+			<!-- TODO mode connecté ou pas et changer la couleur du carré en foncction de la view-->
 			<!--Si on est pas connecté-->
-			<a href="index.php?view=connexion"><h3 id="Connexion">Connexion</h3>
+			<?php if(!valider("connecte","SESSION"))
+			echo "<a href='index.php?view=connexion'><h3 id='Connexion'>Connexion</h3>";
+			else{ 
+			echo "<a href='index.php?view=playlist'><h3 id='playlist'>Playlists</h3></a>";
+			echo "<a href='index.php?view=gestioncompte'><h3 id='parametre'>Paramètres</h3></a>";
+			echo "<a href='index.php?view=accueil&action=deconnexion'><h3 id='deconnexion'>Déconnexion</h3>";}
 			
-			<!--Si on est connecté-->
-			<a href="index.php?view=accueil&action=deconnexion"><h3 id="deconnexion">Déconnexion</h3>
+			?>
 			
 </a>		</ul>
 	</div>
@@ -76,9 +84,33 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 padding: 20px;
 }
 
-#accueil,#recherche,#playlist,#parametre,#Connexion,#deconnexion{
-	background-color: whitesmoke;
-}
+
+<?php  if($view=valider("view")){
+	if($view=="accueil")
+		echo "#recherche,#playlist,#parametre,#Connexion,#deconnexion{
+	background-color: whitesmoke;}#accueil{background-color: lightblue;}";
+	if($view=="recherche")
+		echo "#accueil,#playlist,#parametre,#Connexion,#deconnexion{
+	background-color: whitesmoke;}#recherche{background-color: lightblue;}";
+	if($view=="connexion")
+		echo "	#recherche,#playlist,#parametre,#accueil,#deconnexion{
+	background-color: whitesmoke;}#Connexion{background-color: lightblue;}";
+	if($view=="playlist")
+	echo "	#recherche,#Connexion,#parametre,#accueil,#deconnexion{
+	background-color: whitesmoke;}#playlist{background-color: lightblue;}";
+	if($view=="gestioncompte")
+	echo "	#recherche,#playlist,#Connexion,#accueil,#deconnexion{
+	background-color: whitesmoke;}#parametre{background-color: lightblue;}";
+	
+	}
+	
+?>
+
+
+
+
+
+
 #header ul{
 	display: flex;
 
