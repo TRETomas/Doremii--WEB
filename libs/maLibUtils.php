@@ -102,29 +102,27 @@ function tprint($tab)
 }
 
 
-function rediriger($url,$qs="")
+function rediriger($url,$qs=[])
 {
-	// if ($qs != "")	 $qs = urlencode($qs);	
-	// Il faut respecter l'encodage des caractères dans les chaînes de requêtes
-	// NB : Pose des problèmes en cas de valeurs multiples
-	// TODO: Passer un tabAsso en paramètres
-
-	if ($qs != "") $qs = "?$qs";
+  // On convertir $qs (tableau ou CdC) en $str_qs (CdC à coup sûr)
+  if (is_array($qs)) {
+    // Si $qs est un tableau associatif (dictionnaire)
+    $str_qs = "";
+    // On crée la query string sous forme de CdC
+    foreach ($qs as $cle => $valeur) {
+      // urlencode permet d'encoder les caractères spéciaux
+      $str_qs = $str_qs . $cle . "=" . urlencode($valeur) . "&";
+    }
+    // On supprime le '&' final s'il existe
+    $str_qs = rtrim($str_qs, "&");
+  } else {
+    // Si $qs est une CdC (note : on suppose qu'elle est déjà encodée)
+    $str_qs = $qs;
+  }
  
-	header("Location:$url$qs"); // envoi par la méthode GET
-	die(""); // interrompt l'interprétation du code 
-
-	// TODO: on pourrait passer en parametre le message servant au die...
+  if ($str_qs != "") $str_qs = "?$str_qs";
+  header("Location:$url$str_qs"); // envoi par la méthode GET
+  die(""); // interrompt l'interprétation du code 
 }
 
-// TODO: intégrer les redirections vers la page index dans une fonction :
-
-/*
-// Si la page est appelée directement par son adresse, on redirige en passant pas la page index
-if (basename($_SERVER["PHP_SELF"]) != "index.php")
-{
-	header("Location:../index.php");
-	die("");
-}
-*/
 ?>

@@ -13,8 +13,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 	<div id="page">
 		<h4>Changer vos données personnelles</h4>
-		<a href="nouveaupseudo.html">Nouveau pseudo</a>
-		<a href="nouveaupassword.html">Nouveau mot de passe</a>
+		<a href="index.php?view=nouveaupseudo">Nouveau pseudo</a>
+		<a href="index.php?view=nouveaupassword">Nouveau mot de passe</a>
 	</div>
 	
 	<style>

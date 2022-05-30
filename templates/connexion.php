@@ -8,10 +8,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	header("Location:../index.php?view=accueil");
 	die("");
 }
+
+
+
 ?>
 <form role="form" action="controleur.php">
 <div id="page">
-	
+	<?php 
+		if($msg=valider("msg")){
+		echo "<h3 style='color:red;'>Erreur : $msg </h3>";}
+		?>
+		
 		<h4>Connexion</h4>
 		<p>Pseudo</p>
 		<input type="text" name="login" placeholder="Votre Pseudo" />

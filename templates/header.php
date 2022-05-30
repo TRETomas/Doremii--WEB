@@ -43,7 +43,8 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 			else{ 
 			echo "<a href='index.php?view=playlist'><h3 id='playlist'>Playlists</h3></a>";
 			echo "<a href='index.php?view=gestioncompte'><h3 id='parametre'>Paramètres</h3></a>";
-			echo "<a href='index.php?view=accueil&action=deconnexion'><h3 id='deconnexion'>Déconnexion</h3>";}
+			echo "<a href='controleur.php?action=deconnexion'><h3 id='deconnexion'>Déconnexion</h3></a>";
+			}
 			
 			?>
 			

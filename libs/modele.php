@@ -49,15 +49,6 @@ function mkUser($pseudo, $mdp)
     // Cette fonction crée un nouvel utilisateur et renvoie l'identifiant de l'utilisateur créé
 }
 
-function verifUserBdd($pseudo,$mdp)
-{
-    // Vérifier si le mdp et le pseudo correspond bien
-    // Renvoie false si utilisateur inconnu
-    // Renvoie l'id sinon
-    $SQL="SELECT Id_user FROM User WHERE pseudo='$pseudo' AND password='$mdp'";
-
-    return SQLGetChamp($SQL);
-}
 
 function changerMDP($pseudo, $new_mdp, $mdp)
 {
@@ -74,4 +65,19 @@ function isAdmin($idUser)
     // Vérifie si l'utilisateur est un administrateur
 }
 
+function verifUserBdd($login,$passe)
+{
+	// Vérifie l'identité d'un utilisateur 
+	// dont les identifiants sont passes en paramètre
+	// renvoie faux si user inconnu
+	// renvoie l'id de l'utilisateur si succès
+
+	$SQL="SELECT id_user FROM user WHERE pseudo='$login' AND password='$passe'";
+
+	return SQLGetChamp($SQL);
+	// si on avait besoin de plus d'un champ
+	// on aurait du utiliser SQLSelect
+}
+
 ?>
+
