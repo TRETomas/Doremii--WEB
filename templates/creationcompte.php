@@ -1,7 +1,5 @@
 <?php 
 
-
-
 // Si la page est appelée directement par son adresse, on redirige en passant pas la page index
 // Pas de soucis de bufferisation, puisque c'est dans le cas où on appelle directement la page sans son contexte
 if (basename($_SERVER["PHP_SELF"]) != "index.php")
@@ -13,23 +11,28 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
 ?>
-<form role="form" action="controleur.php">
+
 <div id="page">
+
 	<?php 
 		if($msg=valider("msg")){
 		echo "<h3 style='color:red;'>Erreur : $msg </h3>";}
+		
 		?>
-		<h4>Connexion</h4>
-		<p>Pseudo</p>
+		<form role="form" action="controleur.php">
+			<p>Pseudo</p>
 		<input type="text" name="login" placeholder="Votre Pseudo" />
 		<p>Mot de passe</p>
 		<input type="password" name="passe" placeholder="Votre Mot De Passe" />
+		<input id="envoie" name="action" type="submit" Value="Creer">
 		
-		<a href="index.php?view=creationcompte">Vous n'avez pas de compte ?</a>
-		<input id="envoie" name="action" type="submit" Value="Connexion">
+		</form>
+	
+		
+		
 		
 	</div>
-	</form>
+	
 	
 <style>
 #page{

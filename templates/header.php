@@ -33,7 +33,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 		<ul>
 			
 			<a href="index.php?view=accueil" ><h3 id="accueil">Accueil</h3></a>
-			<a href="index.php?view=recherche"><h3 id="recherche">Recherche</h3></a>
+			
 			
 			
 			<!-- TODO mode connecté ou pas et changer la couleur du carré en foncction de la view-->
@@ -41,7 +41,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 			<?php if(!valider("connecte","SESSION"))
 			echo "<a href='index.php?view=connexion'><h3 id='Connexion'>Connexion</h3>";
 			else{ 
-			echo "<a href='index.php?view=playlist'><h3 id='playlist'>Playlists</h3></a>";
+			echo "<a href='index.php?view=recherche'><h3 id='recherche'>Recherche</h3></a><a href='index.php?view=playlist'><h3 id='playlist'>Playlists</h3></a>";
 			echo "<a href='index.php?view=gestioncompte'><h3 id='parametre'>Paramètres</h3></a>";
 			echo "<a href='controleur.php?action=deconnexion'><h3 id='deconnexion'>Déconnexion</h3></a>";
 			}
@@ -102,7 +102,24 @@ padding: 20px;
 	if($view=="gestioncompte")
 	echo "	#recherche,#playlist,#Connexion,#accueil,#deconnexion{
 	background-color: whitesmoke;}#parametre{background-color: lightblue;}";
-	
+	if($view=="creationplaylist")
+		echo "	#recherche,#Connexion,#parametre,#accueil,#deconnexion{
+	background-color: whitesmoke;}#playlist{background-color: lightblue;}";
+	if($view=="creationcompte")
+		echo "	#recherche,#playlist,#parametre,#accueil,#deconnexion{
+	background-color: whitesmoke;}#Connexion{background-color: lightblue;}";
+	if($view=="nouveaupseudo")
+	echo "	#recherche,#playlist,#Connexion,#accueil,#deconnexion{
+	background-color: whitesmoke;}#parametre{background-color: lightblue;}";
+	if($view=="nouveaupassword")
+	echo "	#recherche,#playlist,#Connexion,#accueil,#deconnexion{
+	background-color: whitesmoke;}#parametre{background-color: lightblue;}";
+	if($view=="commentaires")
+	echo "	#recherche,#Connexion,#parametre,#accueil,#deconnexion{
+	background-color: whitesmoke;}#playlist{background-color: lightblue;}";
+	if($view=="PLAYLIST")
+	echo "	#recherche,#Connexion,#parametre,#accueil,#deconnexion{
+	background-color: whitesmoke;}#playlist{background-color: lightblue;}";
 	}
 	
 ?>

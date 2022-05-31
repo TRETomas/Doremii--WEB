@@ -9,9 +9,8 @@ include_once "libs/maLibUtils.php";
 	// on récupère le paramètre view éventuel 
 	$view = valider("view"); 
 
-	if (!$view) {
+	if (!$view = valider("view")) {
 		$view="accueil";
-		echo $view;
 	}
 	// S'il est vide, on charge la vue accueil par défaut
 

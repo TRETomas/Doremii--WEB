@@ -9,11 +9,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	die("");
 }
 ?>
-<div id="page">
+
+<div id="page"><form role="form" action="index.php">
 		<h4>Recherche</h4>
 		<p>Vous pouvez effectuer votre recherche ici:</p>
-		<input type="text" placeholder="Titre de la playlist" id="champ" onclick="Recherche();"/>
+		<input id="envoie" name="view" type="hidden" value="recherche">
+		<input type="text" placeholder="Titre de la playlist" id="champ" name="text" />
+		<input id="envoie" name="action" type="submit" Value="recherche">
+		</form>
+		<div id="lesplay"></div>
 </div>
+
 <style>
 #page{
 	border: 3px solid black;
@@ -21,7 +27,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	margin: 50px 200px 50px 200px;
 	padding: 10px;
 	background-color: cornsilk;
-	height:500px;
+	height:auto;
 	
 
 }
@@ -36,8 +42,91 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	border-radius: 3px;
 
 }
+
+.playlist{
+
+	display: flex;
+	flex-direction: row;
+	border: 1px solid black;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	justify-content: space-between;
+	background-color: whitesmoke;
+
+}
+
+.playlist:hover{
+	background-color: lightblue;
+
+}
+
+.contenu
+{ line-height:auto;
+margin-top:auto;
+margin-bottom: auto;
+
+padding: auto;}
+
+.Pmage{
+max-width:20% ;
+max-height: 33%;
+
+}
+
+.interaction{max-height: 50px;
+			max-width: 50px;
+			margin-top:2.5%;
+}
+
+.interaction img{
+	widths: 60%;
+	height: 60%;
+	margin: 6%;
+		
+	}
+
+#new{
+	max-height: 50px;
+			max-width: 50px;
 </style>
 
 <script>
-// TODO 
+
+
+<?php
+			if($action=valider("action"))
+			if($action="recherche")
+			if($text=valider("text"))
+				$playlist=afficherplaylist($text);
+			
+
+
+echo"var playlist=$playlist;";
+
+?>
+
+function chargement(){
+refpage=document.getElementById("lesplay");
+//refplaylists=JSON.parse(playlistjson);
+afficherplaylist();
+}
+
+
+
+
+function afficherplaylist(){
+	var i;
+	refpage.innerHTML=null;
+	
+	//refplaylists.playlists.length;
+	
+	
+	for(i=0;i<playlist.length;i++){
+			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+playlist[i].lien_image+"' />"+"<div class='contenu'>"+"<a href='index.php?view=PLAYLIST&id="+playlist[i].id_playlist+"'>"+"<h4>"+playlist[i].nom+"</h4></a>"+"<p>"+playlist[i].pseudo+"</p>"+"<p>Nombre de musiques: "+playlist[i].nbmusique+"</p>"+"</div>"+"<div class='interaction'><a href='controleur.php?action=like&id="+playlist[i].id_playlist+"' ><img src='ressources/like.png' /></a><a href='index.php?view=commentaires&id="+playlist[i].id_playlist+"' ><img src='ressources/comment.png' /></a></div></div>";
+		
+	}
+
+
+
+}
 </script>

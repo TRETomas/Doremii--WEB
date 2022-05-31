@@ -1,4 +1,4 @@
-<?php //TODO s'occuper du contenu de la page, les fonctions js et json rajouter avec sql
+<?php 
 
 
 // Si la page est appelée directement par son adresse, on redirige en passant pas la page index
@@ -22,7 +22,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	margin: 50px 200px 50px 200px;
 	padding: 10px;
 	background-color: cornsilk;
-	height:500px;
+	height:auto;
 	
 
 }
@@ -78,21 +78,26 @@ max-height: 33%;
 
 var refpage=null;
 var refplaylists=null;
+
+
+<?php $user= valider("idUser","SESSION");
+	$playlist=playlist_user($user);
+	echo "var playlist=$playlist";			
+			?>
 /***************************************************/
 //les playlists de l'utilisateur et celles likées//
 /*************************************************/
 //TODO:
 //rajouter un lien sur la playlist
 //rajouter des liens sur les interactions
-var playlistjson='{"playlists":[{"titre":"ma playlist","auteur":"Folschette","contenu":[{"titre":"les copains d\'abord","auteur":"brassens","lien":"https://www.youtube.com/watch?v=L9oEcWFjF3M","durée":"3.22"}],"commentaires":[{"auteur":"Bourdeau","contenu":"waow trop cool la musique"}],"image":"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.rtl.fr%2Frtl%2Fwww%2F1214843-georges-brassens.jpg&f=1&nofb=1"}]}';
+//var playlistjson='{"playlists":[{"titre":"ma playlist","auteur":"Folschette","contenu":[{"titre":"les copains d\'abord","auteur":"brassens","lien":"https://www.youtube.com/watch?v=L9oEcWFjF3M","durée":"3.22"}],"commentaires":[{"auteur":"Bourdeau","contenu":"waow trop cool la musique"}],"image":"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.rtl.fr%2Frtl%2Fwww%2F1214843-georges-brassens.jpg&f=1&nofb=1"}]}';
 					
 /***************************************/
 /**************************************/
 /**************************************/
 function chargement(){
 refpage=document.getElementById("lesplay");
-refplaylists=JSON.parse(playlistjson);
-console.log(refplaylists)
+//refplaylists=JSON.parse(playlistjson);
 afficherplaylist();
 }
 
@@ -102,14 +107,13 @@ afficherplaylist();
 function afficherplaylist(){
 	var i;
 	refpage.innerHTML=null;
+	
 	//refplaylists.playlists.length;
 	
-	for(i=0;i<refplaylists.playlists.length;i++){
-		if(refplaylists.playlists[i].image!=null)
-			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+refplaylists.playlists[i].image+"' />"+"<div class='contenu'>"+"<h4>"+refplaylists.playlists[i].titre+"</h4>"+"<p>"+refplaylists.playlists[i].auteur+"</p>"+"<p>Nombre de musiques: "+refplaylists.playlists[i].contenu.length+"</p>"+"</div>"+"<div class='interaction'><img src='ressources/play.png' /><img src='ressources/like.png' /><img src='ressources/comment.png' /></div></div>";
+	
+	for(i=0;i<playlist.length;i++){
+			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+playlist[i].lien_image+"' />"+"<div class='contenu'>"+"<a href='index.php?view=PLAYLIST&id="+playlist[i].id_playlist+"'>"+"<h4>"+playlist[i].nom+"</h4></a>"+"<p>"+playlist[i].pseudo+"</p>"+"<p>Nombre de musiques: "+playlist[i].nbmusique+"</p>"+"</div>"+"<div class='interaction'><a href='controleur.php?action=like&id="+playlist[i].id_playlist+"' ><img src='ressources/like.png' /></a><a href='index.php?view=commentaires&id="+playlist[i].id_playlist+"' ><img src='ressources/comment.png' /></a></div></div>";
 		
-		else
-			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='default.png' />"+"<div class='contenu'>"+"<h4>"+refplaylists.playlists[i].titre+"</h4>"+"<p>"+refplaylists.playlists[i].auteur+"</p>"+"<p>Nombre de musiques: "+refplaylists.playlists[i].contenu.length+"</p>"+"</div>"+"<div class='interaction'><img src='play.png'/><img src='like.png'/><img src='comment.png'/></div></div>";
 	}
 
 

@@ -13,8 +13,7 @@ session_start();
 		ob_start ();
     echo "Action = '$action' <br />";
     
-      if ($action != "Connexion") 
-			securiser("index.php");
+
 		// ATTENTION : le codage des caractères peut poser PB si on utilise des actions comportant des accents... 
 		// A EVITER si on ne maitrise pas ce type de problématiques
 
@@ -51,14 +50,90 @@ session_start();
           }
         
         
-      break;
+      break;	
 				
 			case 'deconnexion' :
 				session_destroy();
 				$qs["view"]="accueil";
 			break;
 			
-		}}
+			case 'Creation' :
+			$qs["view"]="creationplaylist";
+			 if ($Titre = valider("Titre"))
+			if ($lien = valider("Lien"))
+				{
+					$pseudo=valider("login");
+					$passe=valider("passe");  
+					$user= valider("idUser","SESSION");
+				$qs["idplaylist"]=mkplaylist($Titre,$lien,$user);}
+			else{$qs["msg"]="Erreur lors de la saisie";}
+				
+			break;
+			
+			case 'Creer' :
+				  $qs["view"] = "accueil";
+		  // On verifie la presence des champs pseudo et passe
+		    if ($pseudo = valider("login"))
+		    if ($passe = valider("passe"))
+		  {
+			mkUser($pseudo,$passe);
+		      }
+				
+			break;
+			
+			case 'Ajout' :
+			$qs["view"]="creationplaylist";
+			 if ($Lien = valider("LienMusique"))
+				{$idplaylist=valider("idplaylist");
+					$qs["idplaylist"]=$idplaylist;
+					Ajout($idplaylist,$Lien);
+					}
+			break;
+			
+			
+			
+			
+			
+			
+			
+			case 'Valider':
+			$qs["view"]="gestioncompte";
+				if($new_pseudo=valider("pseudo") ){
+			   changerPseudo($_SESSION["idUser"],$new_pseudo,);
+				}
+			break;
+			case 'Modifier':
+				$qs["view"]="connexion";
+				if($password=valider("passe"))
+				if($password2=valider("passe2"))
+				if($password==$password2){	
+				changerPasse($_SESSION["idUser"] ,$password);
+				session_destroy();
+				 $_SESSION = array();
+				}
+		 	break;
+			
+				
+			case 'like' :
+			  $qs["view"]="playlist";
+			  $playlist=valider("id");
+			  $user=valider("idUser","SESSION");
+			  aimerPlaylist($playlist,$user);
+			  
+			  
+			break;
+			
+			case 'Envoyer':
+			$qs["view"]="commentaires";
+			$id=valider("id");
+			$qs["id"]=$id;
+			$user=valider("idUser","SESSION");
+			$contenu=valider("contenu");
+			mkCommentaire ($id, $user, $contenu);
+			break;
+					
+		}
+		}
 			
 			
 			// On redirige toujours vers la page index, mais on ne connait pas le répertoire de base
