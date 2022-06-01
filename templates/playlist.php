@@ -82,19 +82,12 @@ var refplaylists=null;
 
 <?php $user= valider("idUser","SESSION");
 	$playlist=playlist_user($user);
-	echo "var playlist=$playlist";			
+	echo "var playlist=$playlist;";			
 			?>
-/***************************************************/
-//les playlists de l'utilisateur et celles likées//
-/*************************************************/
-//TODO:
-//rajouter un lien sur la playlist
-//rajouter des liens sur les interactions
-//var playlistjson='{"playlists":[{"titre":"ma playlist","auteur":"Folschette","contenu":[{"titre":"les copains d\'abord","auteur":"brassens","lien":"https://www.youtube.com/watch?v=L9oEcWFjF3M","durée":"3.22"}],"commentaires":[{"auteur":"Bourdeau","contenu":"waow trop cool la musique"}],"image":"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.rtl.fr%2Frtl%2Fwww%2F1214843-georges-brassens.jpg&f=1&nofb=1"}]}';
-					
-/***************************************/
-/**************************************/
-/**************************************/
+<?php $user= valider("idUser","SESSION");
+	$playlist=afficherplaylistaimer($user);
+	echo "var liked=$playlist";?>
+
 function chargement(){
 refpage=document.getElementById("lesplay");
 //refplaylists=JSON.parse(playlistjson);
@@ -112,10 +105,25 @@ function afficherplaylist(){
 	
 	
 	for(i=0;i<playlist.length;i++){
+			if(appartient(playlist[i].id_playlist)){
+			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+playlist[i].lien_image+"' />"+"<div class='contenu'>"+"<a href='index.php?view=PLAYLIST&id="+playlist[i].id_playlist+"'>"+"<h4>"+playlist[i].nom+"</h4></a>"+"<p>"+playlist[i].pseudo+"</p>"+"<p>Nombre de musiques: "+playlist[i].nbmusique+"</p>"+"</div>"+"<div class='interaction'><a href='controleur.php?action=like&id="+playlist[i].id_playlist+"' ><img src='ressources/liked.png' /></a><a href='index.php?view=commentaires&id="+playlist[i].id_playlist+"' ><img src='ressources/comment.png' /></a></div></div>";	
+			}
+			
+			else{
 			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+playlist[i].lien_image+"' />"+"<div class='contenu'>"+"<a href='index.php?view=PLAYLIST&id="+playlist[i].id_playlist+"'>"+"<h4>"+playlist[i].nom+"</h4></a>"+"<p>"+playlist[i].pseudo+"</p>"+"<p>Nombre de musiques: "+playlist[i].nbmusique+"</p>"+"</div>"+"<div class='interaction'><a href='controleur.php?action=like&id="+playlist[i].id_playlist+"' ><img src='ressources/like.png' /></a><a href='index.php?view=commentaires&id="+playlist[i].id_playlist+"' ><img src='ressources/comment.png' /></a></div></div>";
-		
+		}
 	}
 
+function appartient(id){
+	var j;
+	for(j=0;j<liked.length;j++)
+	{	if(liked[j].id_playlist==id)
+			return 1;
+		}
+	return 0;
+	
+	
+	}
 
 
 }

@@ -11,7 +11,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
 ?>
-
+<form role="form" action="controleur.php">
 <div id="page">
 
 	<?php 
@@ -19,20 +19,20 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 		echo "<h3 style='color:red;'>Erreur : $msg </h3>";}
 		
 		?>
-		<form role="form" action="controleur.php">
+		
 			<p>Pseudo</p>
 		<input type="text" name="login" placeholder="Votre Pseudo" />
 		<p>Mot de passe</p>
 		<input type="password" name="passe" placeholder="Votre Mot De Passe" />
 		<input id="envoie" name="action" type="submit" Value="Creer">
 		
-		</form>
+		
 	
 		
 		
 		
 	</div>
-	
+	</form>
 	
 <style>
 #page{

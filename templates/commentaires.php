@@ -37,6 +37,22 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 }
 
+.comm{
+	border:2px solid black;
+	border-radius:10px;
+	background-color:whitesmoke;
+	margin: 5px 80% 5px 0px;
+	padding:5px;
+	}
+
+.comm:hover{background-color:lightblue;
+	}
+	
+	
+.comm>h5{
+	margin:0;
+	text-decoration: underline;}
+
 </style>
 
 <script>
@@ -50,7 +66,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 		refpage=document.getElementById("lesplay");
 		var i;
 		for (i=0;i<commentaire.length;i++){
-			refpage.innerHTML+="<h5>"+commentaire[i].pseudo+"</h5><p>"+commentaire[i].commentaire+"</p>";
+			refpage.innerHTML+="<div class='comm'><h5>"+commentaire[i].pseudo+"</h5><p>"+commentaire[i].commentaire+"</p></div>";
 			}
 		
 		

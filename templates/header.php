@@ -29,7 +29,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 
 
 	<div id="header">
-		<img id="logo" src ="ressources/play.png"/>
+		<a href="controleur.php?action=play"><img id="logo" src ="ressources/play.png"/></a>
 		<ul>
 			
 			<a href="index.php?view=accueil" ><h3 id="accueil">Accueil</h3></a>

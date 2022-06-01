@@ -11,6 +11,9 @@ include_once "libs/maLibUtils.php";
 
 	if (!$view = valider("view")) {
 		$view="accueil";
+		$qs["view"]="accueil";
+		$urlBase = dirname($_SERVER["PHP_SELF"]) . "/index.php";
+		rediriger($urlBase, $qs);
 	}
 	// S'il est vide, on charge la vue accueil par défaut
 

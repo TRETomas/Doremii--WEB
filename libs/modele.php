@@ -13,19 +13,32 @@ function playlist_user($idUser) {
     $SQL="SELECT user.pseudo, playlist.nom, playlist.id_playlist, playlist.lien_image, COUNT(Contenu.lien_musique) AS nbmusique
             FROM user JOIN playlist ON user.id_user = playlist.id_user
                         JOIN Contenu ON playlist.id_playlist = Contenu.id_playlist
+	    
             WHERE user.id_user = '$idUser'
+	
 	    GROUP BY playlist.nom;";  
 
     return json_encode(parcoursRs(SQLSelect($SQL)));
 }
 
+
+function selectmin(){
+   $SQL="SELECT MIN(id_playlist) from playlist;"; 
+    return SQLGetChamp($SQL);
+    }
+    
+  function selectmax(){
+   $SQL="SELECT MAX(id_playlist) from playlist;"; 
+    return SQLGetChamp($SQL);
+    } 
+     
 function afficherplaylistaimer($id_user) {
     $SQL="SELECT user.pseudo, playlist.nom, playlist.id_playlist, playlist.lien_image, COUNT(Contenu.lien_musique) AS nbmusique
             FROM aime JOIN playlist ON playlist.id_playlist = aime.id_playlist
 			JOIN user ON user.id_user=playlist.id_user
 			JOIN Contenu ON Contenu.id_playlist=aime.id_playlist
             WHERE aime.id_user = '$id_user'
-	    GROUP BY playlist.nom;";
+	    GROUP BY playlist.id_playlist;";
 
     return json_encode(parcoursRs(SQLSelect($SQL)));
 }
@@ -87,14 +100,22 @@ function mkCommentaire ($idPlaylist, $idUser, $contenu)
 
 function aimerPlaylist($idPlaylist, $idUser)
 {
+$SQL="Select id_playlist from aime where id_playlist='$idPlaylist' AND id_user='$idUser'";
+$id=SQLGetChamp($SQL);
 $sql="insert into aime (id_playlist,id_user) VALUES ('$idPlaylist','$idUser')";
-SQLInsert($sql);
+$SQL="DELETE FROM aime WHERE id_playlist='$idPlaylist' AND id_user='$idUser';";
+if(!$id){
+SQLInsert($sql);}
+
+else{
+    SQLInsert($SQL);}
+
 return 1;
 }
 
 function retirerAimer($idPlaylist, $idUser)
 {
-    // Retire le j'aime sur la playlist
+
 }
 
 /* PARTIE 2 : Côté Utilisateur */

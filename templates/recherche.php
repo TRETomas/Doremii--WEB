@@ -105,6 +105,10 @@ echo"var playlist=$playlist;";
 
 ?>
 
+<?php $user= valider("idUser","SESSION");
+	$playlist=afficherplaylistaimer($user);
+	echo "var liked=$playlist";?>
+
 function chargement(){
 refpage=document.getElementById("lesplay");
 //refplaylists=JSON.parse(playlistjson);
@@ -122,10 +126,25 @@ function afficherplaylist(){
 	
 	
 	for(i=0;i<playlist.length;i++){
+			if(appartient(playlist[i].id_playlist)){
+			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+playlist[i].lien_image+"' />"+"<div class='contenu'>"+"<a href='index.php?view=PLAYLIST&id="+playlist[i].id_playlist+"'>"+"<h4>"+playlist[i].nom+"</h4></a>"+"<p>"+playlist[i].pseudo+"</p>"+"<p>Nombre de musiques: "+playlist[i].nbmusique+"</p>"+"</div>"+"<div class='interaction'><a href='controleur.php?action=like&id="+playlist[i].id_playlist+"' ><img src='ressources/liked.png' /></a><a href='index.php?view=commentaires&id="+playlist[i].id_playlist+"' ><img src='ressources/comment.png' /></a></div></div>";	
+			}
+			
+			else{
 			refpage.innerHTML+="<div class='playlist'>"+"<img class='Pmage' src='"+playlist[i].lien_image+"' />"+"<div class='contenu'>"+"<a href='index.php?view=PLAYLIST&id="+playlist[i].id_playlist+"'>"+"<h4>"+playlist[i].nom+"</h4></a>"+"<p>"+playlist[i].pseudo+"</p>"+"<p>Nombre de musiques: "+playlist[i].nbmusique+"</p>"+"</div>"+"<div class='interaction'><a href='controleur.php?action=like&id="+playlist[i].id_playlist+"' ><img src='ressources/like.png' /></a><a href='index.php?view=commentaires&id="+playlist[i].id_playlist+"' ><img src='ressources/comment.png' /></a></div></div>";
-		
+		}
 	}
 
+function appartient(id){
+	var j;
+	for(j=0;j<liked.length;j++)
+	{	if(liked[j].id_playlist==id)
+			return 1;
+		}
+	return 0;
+	
+	
+	}
 
 
 }

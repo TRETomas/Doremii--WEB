@@ -50,12 +50,22 @@ session_start();
           }
         
         
-      break;	
+      break;		
+      
+		     case 'play' :
+			  $qs["view"]="PLAYLIST";
+			  $a=rand(selectmin(),selectmax());
+			  $qs["id"]=$a;
+			  
+		     
+		     break;
 				
 			case 'deconnexion' :
 				session_destroy();
 				$qs["view"]="accueil";
 			break;
+			
+			 
 			
 			case 'Creation' :
 			$qs["view"]="creationplaylist";
@@ -71,15 +81,19 @@ session_start();
 			break;
 			
 			case 'Creer' :
-				  $qs["view"] = "accueil";
+				  $qs["view"] = "connexion";
+				  $qs["msg"]="Erreur lors de la saisie";
 		  // On verifie la presence des champs pseudo et passe
 		    if ($pseudo = valider("login"))
 		    if ($passe = valider("passe"))
 		  {
 			mkUser($pseudo,$passe);
+			$qs["msg"]="Compte créé avec succès";
 		      }
 				
 			break;
+			
+			
 			
 			case 'Ajout' :
 			$qs["view"]="creationplaylist";
@@ -115,7 +129,7 @@ session_start();
 			
 				
 			case 'like' :
-			  $qs["view"]="playlist";
+			  $qs["view"]="accueil";
 			  $playlist=valider("id");
 			  $user=valider("idUser","SESSION");
 			  aimerPlaylist($playlist,$user);
