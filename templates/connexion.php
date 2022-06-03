@@ -17,7 +17,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id="page">
 	<?php 
 		if($msg=valider("msg")){
-		echo "<h3 style='color:red;'>Erreur : $msg </h3>";}
+		echo "<h3 style='color:red;'> $msg </h3>";}
 		?>
 		<h4>Connexion</h4>
 		<p>Pseudo</p>

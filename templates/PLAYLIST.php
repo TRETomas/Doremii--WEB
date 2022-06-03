@@ -22,7 +22,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	margin: 50px 200px 50px 200px;
 	padding: 10px;
 	background-color: cornsilk;
-	height:500px;
+	height:auto;
 	
 
 }
